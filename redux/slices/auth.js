@@ -7,12 +7,13 @@ export const AuthSlice = createSlice({
   },
   reducers: {
     login(state, action) {
-      return { ...state, user: action.payload };
+      console.log(action);
+      state.user = action.payload;
     },
     logout(state) {
       if (state.user === null) return;
 
-      return { ...state, user: null };
+      state.user = null;
     },
   },
 });
