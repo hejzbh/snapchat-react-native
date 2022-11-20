@@ -15,7 +15,7 @@ import { auth } from "../firebase/config";
 import formatFirebaseError from "../utils/formatFirebaseError";
 
 export const LoginScreen = () => {
-  const { navigate } = useNavigation();
+  const navigation = useNavigation();
   const [showForm, setShowForm] = useState({
     login: true,
     register: false,
@@ -42,7 +42,12 @@ export const LoginScreen = () => {
 
       const tryToLogin = await signInWithEmailAndPassword(auth, email, password)
         .then((createdUser) => {
-          navigate("Home");
+          // Navigate user to HomeScreen and hide current Login screen because he is available
+          // only for unauthenticated users
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Home" }],
+          });
         })
         .catch((err) => {
           throw new Error(err);

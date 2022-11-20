@@ -9,18 +9,23 @@ const Button = ({
   onPress,
   extraClass = "",
   disabled = false,
+  reverse = false,
   textColor = "red",
 }) => {
   return (
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      className={`p-4 px-8 rounded-3xl mt-8 flex items-center justify-center ${
+      className={`p-4 px-8 rounded-3xl mt-8 flex ${
+        reverse ? "flex-row-reverse" : "flex-row"
+      } items-center justify-center ${
         disabled ? "bg-blue-400" : "bg-blue-600"
       } ${extraClass}`}
     >
       {Icon && Icon}
-      <Text className={`text-white font-bold ${textColor}`}>{title}</Text>
+      {title && (
+        <Text className={`text-white font-bold ${textColor}`}>{title}</Text>
+      )}
     </Pressable>
   );
 };

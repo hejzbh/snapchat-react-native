@@ -47,7 +47,7 @@ export const RegisterForm = ({ switchForms, onSubmit }) => {
       {activeRegisterStep?.type === "input" ? (
         <>
           {activeRegisterStep.inputs.map((input) => (
-            <View className="mb-5">
+            <View key={input.key} className="mb-5">
               {/** Label */}
               <Text className="mb-1 text-blue-500 uppercase">
                 {input.label}
