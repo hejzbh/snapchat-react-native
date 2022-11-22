@@ -53,4 +53,17 @@ export default [
       },
     ],
   },
+  {
+    key: "five step",
+    description: `Select your bitmoji`,
+    type: "bitmoji picker",
+    name: "bitmoji",
+    inputs: [
+      {
+        name: "password",
+        label: "fsafs",
+        placeholder: "Enter your password",
+      },
+    ],
+  },
 ];

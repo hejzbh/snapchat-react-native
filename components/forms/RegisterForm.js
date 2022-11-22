@@ -1,4 +1,4 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Image } from "react-native";
 import React, { useMemo, useState } from "react";
 // Register steps
 import registerSteps from "../../utils/constant/registerSteps";
@@ -8,6 +8,8 @@ import Button from "../Button";
 import formatDate from "../../utils/formatDate";
 // Libaries
 import DateTimePicker from "@react-native-community/datetimepicker";
+// Components
+import BitmojiPicker from "../BitmojiPicker";
 
 export const RegisterForm = ({ switchForms, onSubmit }) => {
   const [registerData, setRegisterData] = useState({
@@ -16,6 +18,7 @@ export const RegisterForm = ({ switchForms, onSubmit }) => {
     email: "",
     password: "",
     birthdate: "",
+    bitmoji: "",
   });
   const [activeStep, setActiveStep] = useState(0);
   const activeRegisterStep = useMemo(() => {
@@ -40,7 +43,7 @@ export const RegisterForm = ({ switchForms, onSubmit }) => {
   };
 
   const nextStep = () => setActiveStep((step) => step + 1);
-
+  console.log(registerData);
   return (
     <View className="min-w-[60%]">
       {/** Current active step needed inputs */}
@@ -63,7 +66,7 @@ export const RegisterForm = ({ switchForms, onSubmit }) => {
             </View>
           ))}
         </>
-      ) : (
+      ) : activeRegisterStep.type === "birthdate" ? (
         /** Current input step needs birthdate libary */
         <>
           {registerData.birthdate ? (
@@ -89,7 +92,27 @@ export const RegisterForm = ({ switchForms, onSubmit }) => {
             />
           )}
         </>
+      ) : (
+        <View className="flex justify-center items-center">
+          {registerData.bitmoji ? (
+            <Image
+              source={{ uri: registerData.bitmoji.url }}
+              style={{ width: 100, height: 100 }}
+            />
+          ) : (
+            <>
+              <Text>Select your bitmoji</Text>
+              <BitmojiPicker
+                onBitmojiSelected={(bitmoji) =>
+                  handleInputChange("bitmoji", bitmoji)
+                }
+              />
+            </>
+          )}
+        </View>
       )}
+
+      {/** Buttons */}
       {activeRegisterStep.key === lastRegisterStep.key ? (
         <Button
           onPress={() => onSubmit(registerData)}

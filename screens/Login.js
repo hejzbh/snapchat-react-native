@@ -13,6 +13,7 @@ import {
 import { auth } from "../firebase/config";
 // UTILS
 import formatFirebaseError from "../utils/formatFirebaseError";
+import SendDataToFirestore from "../utils/SendDataToFirestore";
 
 export const LoginScreen = () => {
   const navigation = useNavigation();
@@ -69,9 +70,13 @@ export const LoginScreen = () => {
         email,
         password
       )
-        .then((res) => {
-          console.log("user is successfully created");
-          console.log(res);
+        .then(async (res) => {
+          // Send user data to firestore
+          // PATH - ID - DATA
+          await SendDataToFirestore("users", res.user.uid, {
+            ...credentials,
+            id: res.user.uid,
+          });
         })
         .catch((error) => {
           throw new Error(error);
