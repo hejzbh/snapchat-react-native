@@ -14,9 +14,11 @@ import { auth } from "../firebase/config";
 // UTILS
 import formatFirebaseError from "../utils/formatFirebaseError";
 import SendDataToFirestore from "../utils/SendDataToFirestore";
+import { useAuth } from "../redux/slices/auth";
 
 export const LoginScreen = () => {
   const navigation = useNavigation();
+  const { user } = useAuth();
   const [showForm, setShowForm] = useState({
     login: true,
     register: false,

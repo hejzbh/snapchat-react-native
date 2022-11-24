@@ -43,7 +43,7 @@ const Camera = () => {
     // Store image to redux
     dispatch(setPicture(picture));
 
-    // Take user to the snap preview page
+    // Navigate user to the snap preview page
     navigate("Preview", { picutre: picture });
   };
 
