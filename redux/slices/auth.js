@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
+import updateOnlineStatus from "../../utils/updateOnlineStatus";
 export const AuthSlice = createSlice({
   name: "User authentication details",
   initialState: {
@@ -7,10 +8,11 @@ export const AuthSlice = createSlice({
   },
   reducers: {
     login(state, action) {
-      console.log(action);
       state.user = action.payload;
+      updateOnlineStatus(state.user.uid, "online");
     },
     logout(state) {
+      if (state.user) updateOnlineStatus(state.user.uid, "offline");
       if (state.user === null) return;
 
       state.user = null;

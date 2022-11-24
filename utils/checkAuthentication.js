@@ -6,6 +6,8 @@ import { login, logout } from "../redux/slices/auth";
 export default async (dispatch, setAllReady) => {
   onAuthStateChanged(auth, (user) => {
     if (user) {
+      console.log(user.uid);
+      console.log("AUTHENTICATION CHECK");
       dispatch(
         login({
           name: user.displayName,
