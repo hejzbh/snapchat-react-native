@@ -19,7 +19,7 @@ const Button = ({
       className={`p-4 px-8 rounded-3xl mt-8 flex ${
         reverse ? "flex-row-reverse" : "flex-row"
       } items-center justify-center ${
-        disabled ? "bg-blue-400" : "bg-blue-600"
+        disabled ? "bg-blue-400 opacity-50" : "bg-blue-600"
       } ${extraClass}`}
     >
       {Icon && Icon}

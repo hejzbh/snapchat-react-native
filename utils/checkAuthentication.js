@@ -2,18 +2,17 @@ import { auth } from "../firebase/config";
 import { onAuthStateChanged } from "firebase/auth";
 // Redux
 import { login, logout } from "../redux/slices/auth";
-
+// Utils
+import getUserFirestoreData from "./getUserFirestoreData";
 export default async (dispatch, setAllReady) => {
-  onAuthStateChanged(auth, (user) => {
+  onAuthStateChanged(auth, async (user) => {
     if (user) {
-      console.log(user.uid);
-      console.log("AUTHENTICATION CHECK");
+      const userFirestoreData = await getUserFirestoreData(user.uid);
       dispatch(
         login({
-          name: user.displayName,
-          email: user.email,
           uid: user.uid,
           accessToken: user.accessToken,
+          ...userFirestoreData,
         })
       );
       setAllReady(true);

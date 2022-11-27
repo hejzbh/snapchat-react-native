@@ -6,6 +6,7 @@ import { store } from "./redux/store";
 // Navigation
 import { ScreenNavigator } from "./navigation/ScreenNavigator";
 import * as SplashScreen from "expo-splash-screen";
+
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {

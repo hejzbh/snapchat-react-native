@@ -29,6 +29,18 @@ export default [
     ],
   },
   {
+    key: "third snap",
+    description: `What's your username?`,
+    type: "input",
+    inputs: [
+      {
+        name: "username",
+        label: "Username",
+        placeholder: "Enter your username",
+      },
+    ],
+  },
+  {
     key: "third step",
     type: "input",
     description: "Your password should be at least 88 characters long.",

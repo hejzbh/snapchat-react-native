@@ -18,6 +18,7 @@ export const RegisterForm = ({ switchForms, onSubmit }) => {
     email: "",
     password: "",
     birthdate: "",
+    username: "",
     bitmoji: "",
   });
   const [activeStep, setActiveStep] = useState(0);

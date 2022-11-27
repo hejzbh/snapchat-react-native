@@ -6,6 +6,16 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./local/assets/notification-icon.png",
+          "color": "#ffffff",
+          "sounds": ["./assets/sounds/notification.wav"]
+        }
+      ]
+    ],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -15,7 +25,8 @@
       "fallbackToCacheTimeout": 0
     },
     "infoPlist": {
-      "NSCameraUsageDescription": "Please accept your camera if you want to use this application"
+      "NSCameraUsageDescription": "Please accept your camera if you want to use this application",
+      "ACCESS_BACKGROUND_LOCATION": "Prihvatite lokaciju molimo vas"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
