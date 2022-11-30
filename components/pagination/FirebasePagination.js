@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { collection, getDocs, query, limit, where } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import Button from "../Button";
@@ -18,6 +18,7 @@ const Pagination = ({
 }) => {
   const [perPage, setPerPage] = useState(howMuchLoadPerPage);
   const [noMore, setNoMore] = useState(false);
+  const [whereConditionData, setWhereConditionData] = useState(whereData);
 
   useEffect(() => {
     const getDataFromFirestore = async () => {
@@ -26,7 +27,7 @@ const Pagination = ({
         await getDocs(
           query(
             collection(db, collectionName),
-            where(whereAttribute, whereCondition, whereData),
+            where(whereAttribute, whereCondition, whereConditionData),
             limit(perPage)
           )
         ).then(({ docs }) => {
@@ -53,7 +54,7 @@ const Pagination = ({
       }
     };
     getDataFromFirestore();
-  }, [collectionName, perPage, whereData]);
+  }, [collectionName, perPage, whereConditionData]);
 
   return (
     <View>

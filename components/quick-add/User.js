@@ -88,7 +88,6 @@ const User = ({ user }) => {
         }
         onPress={() => {
           if (!friendRequestSent && !recievedFriendRequest) {
-            alert("Nekim cudom i ovo pokrene");
             addFriend(loggedUser, user.id);
             setFriendRequestSent(true);
             return;

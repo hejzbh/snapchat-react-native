@@ -9,6 +9,7 @@ import { HomeScreen } from "../screens/Home";
 import { LoginScreen } from "../screens/Login";
 import { PreviewPage } from "../screens/Preview";
 import { Friends } from "../screens/Friends";
+import { SendTo } from "../screens/SendTo";
 // Redux
 import { useAuth } from "../redux/slices/auth";
 import { useDispatch } from "react-redux";
@@ -60,6 +61,7 @@ export const ScreenNavigator = () => {
                 {/** Modals */}
                 <Stack.Group screenOptions={{ presentation: "modal" }}>
                   <Stack.Screen name="Friends" component={Friends} />
+                  <Stack.Screen name="SendTo" component={SendTo} />
                 </Stack.Group>
               </>
             ) : (

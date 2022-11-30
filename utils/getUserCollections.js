@@ -10,6 +10,7 @@ export default async (dispatch, loggedUser) => {
     (snapshot) => {
       const friends = snapshot.docs.map((doc) => {
         const data = doc.data();
+        console.log(data);
         return data.users.find((user) => user !== loggedUser.uid);
       });
 

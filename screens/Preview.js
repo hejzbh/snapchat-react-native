@@ -43,6 +43,7 @@ export const PreviewPage = () => {
       <Button
         extraClass="bg-[yellow] p-2 px-6 absolute bottom-5 right-5"
         textColor="text-black"
+        onPress={() => navigation.navigate("SendTo")}
         reverse
         Icon={
           <MaterialCommunityIcons

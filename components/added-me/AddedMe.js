@@ -16,7 +16,6 @@ const AddedMe = () => {
 
   useEffect(() => {
     if (!user?.uid) return;
-
     getFriendRequestes(user.uid);
   }, [user?.uid, friends]);
 
