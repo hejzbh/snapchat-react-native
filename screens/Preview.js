@@ -2,7 +2,7 @@ import { View, Image, BackHandler } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 // Utils
 import makeSureToGoBack from "../utils/makeSureToGoBack";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 // REDUX
 import { removePicture, useCameraPicture } from "../redux/slices/cameraPicture";
 import { useDispatch } from "react-redux";
@@ -15,6 +15,7 @@ export const PreviewPage = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const { picture } = useCameraPicture();
+  const [snapExpiresTime, setSnapExpiresTime] = useState("not-expiration");
 
   useEffect(() => {
     BackHandler.addEventListener("hardwareBackPress", async () => {
@@ -38,12 +39,16 @@ export const PreviewPage = () => {
         source={{ uri: picture?.uri }}
       />
       {/** Options such as save to gallery */}
-      <PreviewImageOptions image={picture?.uri} />
+      <PreviewImageOptions
+        image={picture?.uri}
+        snapExpiresTime={snapExpiresTime}
+        setSnapExpiresTime={setSnapExpiresTime}
+      />
       {/** Navigation button to navigating us to page where we can select users we want snap sent to */}
       <Button
         extraClass="bg-[yellow] p-2 px-6 absolute bottom-5 right-5"
         textColor="text-black"
-        onPress={() => navigation.navigate("SendTo")}
+        onPress={() => navigation.navigate("SendTo", { snapExpiresTime })}
         reverse
         Icon={
           <MaterialCommunityIcons

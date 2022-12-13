@@ -81,14 +81,14 @@ export const RegisterForm = ({ switchForms, onSubmit }) => {
                   }))
                 }
               >
-                {formatDate(registerData.birthdate)}
+                {formatDate(new Date(registerData.birthdate))}
               </Text>
             </>
           ) : (
             <DateTimePicker
-              value={new Date()}
+              value={registerData.birthdate || new Date()}
               onChange={(e, value) =>
-                handleInputChange(activeRegisterStep.name, value)
+                handleInputChange(activeRegisterStep.name, value.toISOString())
               }
             />
           )}

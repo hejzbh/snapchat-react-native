@@ -23,7 +23,7 @@ const BottomNavigation = ({ bgTransparent = false }) => {
       iconName: "ios-location-outline",
     },
     {
-      screen: "ChatList",
+      screen: "Snaps",
       IconProvider: MaterialIcons,
       iconName: "chat-bubble-outline",
     },

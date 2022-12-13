@@ -12,7 +12,7 @@ import { useAuth } from "../../redux/slices/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 import { useFriends } from "../../redux/slices/friends";
-const User = ({ user }) => {
+const User = ({ user, extraClass, showRequestButton = true }) => {
   const [areUsersFriends, setAreUsersFriends] = useState(false);
   const [friendRequestSent, setFriendRequestSent] = useState(false);
   const [recievedFriendRequest, setRecievedFriendRequest] = useState(false);
@@ -47,7 +47,9 @@ const User = ({ user }) => {
   }, [friends, user]);
 
   return (
-    <View className="flex justify-between items-center flex-row bg-white p-2 rounded-xl mb-5">
+    <View
+      className={`flex justify-between items-center flex-row bg-white p-2 rounded-xl mb-5 ${extraClass}`}
+    >
       {/** BITMOJI */}
       <View className="bg-gry/20 p-1 rounded-full">
         <Image
@@ -63,43 +65,45 @@ const User = ({ user }) => {
         <Text className="text-[12px] text-gray/50">{user.username}</Text>
       </View>
       {/** Add friend */}
-      <Button
-        disabled={friendRequestSent}
-        extraClass={`py-2 px-4 rounded-2xl bg-[gray]/50 mt-0 ${
-          recievedFriendRequest && "bg-[green]"
-        }`}
-        textColor="text-[gray]"
-        Icon={
-          <Ionicons
-            name="person-add"
-            style={{ marginRight: 6 }}
-            size={15}
-            color="gray"
-          />
-        }
-        title={
-          friendRequestSent
-            ? "Sent"
-            : recievedFriendRequest
-            ? "Accept"
-            : areUsersFriends
-            ? "Friends"
-            : "Add friend"
-        }
-        onPress={() => {
-          if (!friendRequestSent && !recievedFriendRequest) {
-            addFriend(loggedUser, user.id);
-            setFriendRequestSent(true);
-            return;
+      {showRequestButton && (
+        <Button
+          disabled={friendRequestSent}
+          extraClass={`py-2 px-4 rounded-2xl bg-[gray]/50 mt-0 ${
+            recievedFriendRequest && "bg-[green]"
+          }`}
+          textColor="text-[gray]"
+          Icon={
+            <Ionicons
+              name="person-add"
+              style={{ marginRight: 6 }}
+              size={15}
+              color="gray"
+            />
           }
+          title={
+            friendRequestSent
+              ? "Sent"
+              : recievedFriendRequest
+              ? "Accept"
+              : areUsersFriends
+              ? "Friends"
+              : "Add friend"
+          }
+          onPress={() => {
+            if (!friendRequestSent && !recievedFriendRequest) {
+              addFriend(loggedUser, user.id);
+              setFriendRequestSent(true);
+              return;
+            }
 
-          if (recievedFriendRequest) {
-            acceptFriend(loggedUser, user);
-            setAreUsersFriends(true);
-            setRecievedFriendRequest(false);
-          }
-        }}
-      />
+            if (recievedFriendRequest) {
+              acceptFriend(loggedUser, user);
+              setAreUsersFriends(true);
+              setRecievedFriendRequest(false);
+            }
+          }}
+        />
+      )}
     </View>
   );
 };

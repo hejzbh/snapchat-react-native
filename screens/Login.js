@@ -74,6 +74,7 @@ export const LoginScreen = () => {
       )
         .then(async (res) => {
           // Send user data to firestore
+          delete credentials.password; // we dont want to store password in firestore
           // PATH - ID - DATA
           await SendDataToFirestore("users", res.user.uid, {
             ...credentials,

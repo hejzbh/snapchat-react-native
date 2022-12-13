@@ -36,12 +36,13 @@ const Camera = () => {
       base: 64,
       exif: false,
     };
-
+    console.log(imageOptions);
     // Image we took
     const picture = await cameraRef.current.takePictureAsync(imageOptions);
 
     // Store image to redux
     dispatch(setPicture(picture));
+    console.log(picture);
 
     // Navigate user to the snap preview page
     navigate("Preview", { picutre: picture });
