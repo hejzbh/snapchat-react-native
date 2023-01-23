@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, BackHandler } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useFriends } from "../redux/slices/friends";
@@ -15,6 +15,7 @@ import { db } from "../firebase/config";
 import { useAuth } from "../redux/slices/auth";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import User from "../components/quick-add/User";
+import makeSureToGoBack from "../utils/makeSureToGoBack";
 // Icons
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import uploadPictureToFirestore from "../utils/uploadPictureToFirestore";
@@ -83,6 +84,19 @@ export const SendTo = () => {
         : [...selectedFriends, friend]
     );
   };
+
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", async () => {
+      const sure = await makeSureToGoBack();
+      sure
+        ? (() => {
+            navigate("Preview");
+          })()
+        : "";
+    });
+
+    return () => BackHandler.removeEventListener("hardwareBackPress");
+  }, []);
 
   return (
     <SafeAreaView className="relative h-full">

@@ -24,10 +24,11 @@ export const LoginScreen = () => {
     register: false,
   });
   const [error, setError] = useState(null);
+  const { navigate } = useNavigation();
 
   const resetError = () => setError(null);
   const switchForms = () =>
-    setShowForm((showForms) => {
+    setShowForm((showForm) => {
       return {
         login: showForm.login ? false : true,
         register: showForm.register ? false : true,
@@ -80,12 +81,16 @@ export const LoginScreen = () => {
             ...credentials,
             id: res.user.uid,
           });
+          // Go to homepage
+          navigation.reset({
+            index: 0,
+            routes: [{ name: "Home" }],
+          });
         })
         .catch((error) => {
           throw new Error(error);
         });
     } catch (error) {
-      console.log(error);
       setError(formatFirebaseError(error.message));
     }
   };

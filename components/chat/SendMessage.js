@@ -42,7 +42,7 @@ const SendMessage = ({ chatID, setOpenGallery }) => {
   };
 
   return (
-    <View className="absolute left-0 right-0 bottom-0 bg-tranparent p-2 border-t-[1px] border-[gray] flex flex-row justify-between">
+    <View className="absolute left-0 bg-white right-0 bottom-0 bg-tranparent p-2 border-t-[1px] border-[gray] flex flex-row justify-between">
       <KeyboardAvoidingView behavior="position" className="w-[88%]">
         {/** Input */}
         <TextInput

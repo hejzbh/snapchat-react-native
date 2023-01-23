@@ -22,7 +22,7 @@ export const PreviewPage = () => {
       const sure = await makeSureToGoBack();
       sure
         ? (() => {
-            navigation.goBack();
+            navigation.navigate("Home");
             dispatch(removePicture());
           })()
         : "";

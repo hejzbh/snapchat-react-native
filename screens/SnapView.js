@@ -52,12 +52,8 @@ export const SnapView = () => {
           unviewedSnaps.push(unviewedSnap);
           counter++; // increase counter of unviewedSnaps by 1
         }
-
         // If we fetched all snaps and came to last one, resolve promise.
-        if (counter === unviewedSnaps.length && i === snapIDs.length - 2) {
-          unviewedSnaps = unviewedSnaps.sort(
-            (a, b) => a.timestamp - b.timestamp
-          ); // sort from older to newest
+        if (i === snapIDs.length - 1) {
           resolve();
         }
       });
@@ -65,7 +61,6 @@ export const SnapView = () => {
 
     // unseen snaps exists ? take the oldest one, else keep default value;
     firstUnviewedSnap = unviewedSnaps[0] ? unviewedSnaps[0] : firstUnviewedSnap;
-
     return firstUnviewedSnap;
   };
 
